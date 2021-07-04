@@ -1,3 +1,6 @@
-= form_for @message do |f|
-  = f.text_area :content, class: 'form-control'
-  = f.submit t('btn.generate')
+.row
+  = form_for @message do |f|
+    .mb-3
+      = f.text_area :content, class: 'form-control', placeholder: t('content'), rows: 6
+    .mb-3
+      = f.submit t('generate'), class: 'btn btn-primary'

@@ -1,6 +1,5 @@
 .row
-  = form_for @message do |f|
-    .mb-3
-      = f.text_area :content, class: 'form-control', placeholder: t('content'), rows: 6
-    .mb-3
-      = f.submit t('generate'), class: 'btn btn-primary'
+  h3 = @message.content
+hr
+
+== @qr.as_svg(color: "000", shape_rendering: "crispEdges", module_size: 11, standalone: true, use_path: true)

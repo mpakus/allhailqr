@@ -1,3 +1,4 @@
-en:
-  btn:
-    generate: Generate QR
+ru:
+  title: Сгенерировать QR
+  content: Текст вашего сообщения
+  generate: Генерировать

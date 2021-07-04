@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title AllHail QR
+    meta content="width=device-width,initial-scale=1" name="viewport" /
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body.container.py-3
+    - if @hide_title
+      .d-flex.flex-column.flex-md-row.align-items-center.pb-3.mb-4.border-bottom
+        a.d-flex.align-items-center.text-dark.text-decoration-none href="/#{params[:locale]}/messages/new"
+          span.fs-4 &laquo;
+    - else
+      .d-flex.flex-column.flex-md-row.align-items-center.pb-3.mb-4.border-bottom
+        a.d-flex.align-items-center.text-dark.text-decoration-none href="/#{params[:locale]}/messages/new"
+          span.fs-4 = t('title')
+        nav.d-inline-flex.mt-2.mt-md-0.ms-md-auto
+          a.me-3.py-2.text-dark.text-decoration-none href="/ru/messages/new" RU
+          a.me-3.py-2.text-dark.text-decoration-none href="/en/messages/new" EN
+
+    = yield
