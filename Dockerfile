@@ -1,40 +1,30 @@
 FROM ruby:2.7.2-alpine
 
-ENV APP_PATH /var/app
-ENV BUNDLE_VERSION 2.1.4
-ENV BUNDLE_PATH /usr/local/bundle/gems
-ENV TMP_PATH /tmp/
-ENV RAILS_LOG_TO_STDOUT true
-ENV RAILS_PORT 3000
+# Install yarn and postgresql client
+ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
+RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
+RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install -qq -y --no-install-recommends build-essential libpq-dev curl
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN apt-get update && apt-get install -qq -y --no-install-recommends nodejs yarn postgresql-client
 
-# copy entrypoint scripts and grant execution permissions
-COPY ./dev-docker-entrypoint.sh /usr/local/bin/dev-entrypoint.sh
-COPY ./test-docker-entrypoint.sh /usr/local/bin/test-entrypoint.sh
-RUN chmod +x /usr/local/bin/dev-entrypoint.sh && chmod +x /usr/local/bin/test-entrypoint.sh
+# Install dependencies
+RUN mkdir /app
+WORKDIR /app
 
-# install dependencies for application
-RUN apk -U add --no-cache \
-build-base \
-git \
-postgresql-dev \
-postgresql-client \
-libxml2-dev \
-libxslt-dev \
-nodejs \
-yarn \
-imagemagick \
-tzdata \
-less \
-&& rm -rf /var/cache/apk/* \
-&& mkdir -p $APP_PATH
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+COPY package.json /app/package.json
+
+RUN gem install bundler
+RUN bundle install
+
+COPY . /app
+
+RUN yarn
 
 
-RUN gem install bundler --version "$BUNDLE_VERSION" \
-&& rm -rf $GEM_HOME/cache/*
+# Expose and run server on port 3000
+EXPOSE 3000
 
-# navigate to app directory
-WORKDIR $APP_PATH
-
-EXPOSE $RAILS_PORT
-
-ENTRYPOINT [ "bundle", "exec" ]
+CMD ["rails", "server", "-b", "0.0.0.0"]
