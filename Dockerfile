@@ -25,6 +25,6 @@ RUN yarn
 
 
 # Expose and run server on port 3000
-EXPOSE 3000
+EXPOSE 5000
 
 CMD ["rails", "server", "-b", "0.0.0.0"]
