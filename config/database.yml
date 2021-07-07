@@ -13,7 +13,12 @@ test:
   database: allhail_test
 
 production:
-  url: <%= ENV['QOVERY_DATABASE_ALLHAILQR_DB_CONNECTION_URI'] %>
+  <<: *default
+  host: <%= ENV['QOVERY_DATABASE_ALLHAILQR_DB_HOST'] %>
+  database: <%= ENV['QOVERY_DATABASE_ALLHAILQR_DB_NAME'] %>
+  username: <%= ENV['QOVERY_DATABASE_ALLHAILQR_DB_USERNAME'] %>
+  password: <%= ENV['QOVERY_DATABASE_ALLHAILQR_DB_PASSWORD'] %>
+
 #
 #  BUILT_IN | QOVERY_BRANCH_NAME                                              | main
 #  BUILT_IN | QOVERY_IS_PRODUCTION                                            | false
