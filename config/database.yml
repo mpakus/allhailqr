@@ -13,5 +13,23 @@ test:
   database: allhail_test
 
 production:
-  <<: *default
-  database: allhail_production
+  url: <%= ENV['QOVERY_DATABASE_MY_DB_CONNECTION_URI'] %>
+#
+#  BUILT_IN | QOVERY_BRANCH_NAME                                              | main
+#  BUILT_IN | QOVERY_IS_PRODUCTION                                            | false
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_NAME                               | postgresql-allhailqr-db
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_TYPE                               | POSTGRESQL
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_VERSION                            | 11.5
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_CONNECTION_URI                     | <hidden>
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_CONNECTION_URI_WITHOUT_CREDENTIALS | <hidden>
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_HOST                               | <hidden>
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_FQDN                               | <hidden>
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_PORT                               | <hidden>
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_USERNAME                           | <hidden>
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_PASSWORD                           | <hidden>
+#  BUILT_IN | QOVERY_DATABASE_ALLHAILQR_DB_DATABASE                           | postgres
+#  BUILT_IN | QOVERY_APPLICATION_ALLHAILQR_APP_HOSTNAME                       | <hidden>
+#  BUILT_IN | QOVERY_ROUTER_MAIN_URL                                          | https://main-wwh....mycz-gtw.qovery.io
+#  BUILT_IN | QOVERY_ROUTER_MAIN_HOST                                         | <hidden>
+#  BUILT_IN | QOVERY_APPLICATION_COMMIT_SHA                                   | 0...f788a2b84534697
+#  BUILT_IN | QOVERY_APPLICATION_COMMIT_SHA_SHORT                             | 01...3e2
