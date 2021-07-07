@@ -1,14 +1,14 @@
 application:
-  name: my-application
-  project: my-project
+  name: allhailqr-app
+  project: allhailqr
   publicly_accessible: true
 databases:
   - type: postgresql
     version: "11.5"
-    name: my-db
+    name: allhailqr-db
 routers:
   - name: main
     routes:
-      - application_name: my-application
+      - application_name: allhailqr-app
         paths:
           - /
